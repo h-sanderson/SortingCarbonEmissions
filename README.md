@@ -1,13 +1,30 @@
 # SortingCarbonEmissions
 
-Algorithms to Implement
-- Serial: Quick Sort, Merge Sort,  Radix Sort, Insertion Sort, Heap Sort, Shell Sort, Bubblesort
+Algorithms to Implement (I = implemented)
+- Serial:
+  - Quick Sort (I)
+  - Merge Sort (I)
+  - Radix Sort (I)
+  - Insertion Sort (I)
+  - Heap Sort 
+  - Shell Sort
+  - Bubblesort
 - Parallel: Quick Sort, Merge Sort, Radix Sort, Insertion Sort, Bitonic Sort
 
+Big Os:
+| Algorithm      | Time Complexity |             |             | Space Complexity |
+|----------------|-----------------|-------------|-------------|------------------|
+|                |   Best          | Average     | Worst       |       Worst      |
+| Bubble Sort    | O(n)            | O(n^2)      | O(n^2)      | O(1)             |
+| Insertion Sort | O(n)            | O(n^2)      | O(n^2)      | O(1)             |
+| Heap Sort      | O(n log(n))     | O(n log(n)) | O(n log(n)) | O(1)             |
+| Quick Sort     | O(n log(n))     | O(n log(n)) | O(n^2)      | O(n)             |
+| Merge Sort     | O(n log(n))     | O(n log(n)) | O(n log(n)) | O(n)             |
+| Radix Sort     | O(nk)           | O(nk)       | O(nk)       | O(n + k)         |
+| Shell Sort     | O(n log(n))     | O(n log(n)) | O(n^2)      | O(1)             |
 
-- Carbon Tracker: https://github.com/mlco2/codecarbon?tab=readme-ov-file
+- Tracking Carbon Using: https://github.com/mlco2/codecarbon?tab=readme-ov-file
 - Parallel Sorting Psuedocode: https://www.cs.cmu.edu/~scandal/nesl/algorithms.html
-
 
 Research Process:
 - Hypothesis: Unsure
