@@ -1,7 +1,7 @@
 # SortingCarbonEmissions
 
 Algorithms to Implement
-- Serial: Quick Sort, Merge Sort,  Radix Sort, Insertion Sort, Heap Sort, Shell Sort
+- Serial: Quick Sort, Merge Sort,  Radix Sort, Insertion Sort, Heap Sort, Shell Sort, Bubblesort
 - Parallel: Quick Sort, Merge Sort, Radix Sort, Insertion Sort, Bitonic Sort
 
 
