@@ -26,10 +26,16 @@ Big Os:
 - Tracking Carbon Using: https://github.com/mlco2/codecarbon?tab=readme-ov-file
 - Parallel Sorting Psuedocode: https://www.cs.cmu.edu/~scandal/nesl/algorithms.html
 
+ISSUES:
+- How to best run and measure CUDA CODE?
+  - Run Script using subprocesses
+  - Numba
+  - 
+
 Research Process:
 - Hypothesis:
   - Serial: Algorithms with smaller time complexities and smaller space complexities should have smaller carbon output. Based on this Heap Sort being O(n log(n) with a space complexity of O(1) should be the most energy and carbon efficient program. Quick Sort and Merge Sort being close seconds. I imagine Radix sort to also be near the top given the number of digits in the largest number is small (this represents k). I see Bubble and Insertion sort to be the least carbon efficient.
-  - Serial CPU vs Parallel GPU: Generally GPUs have higher energy usage than CPUs. However, if the GPU sorts more than x times faster than the x times more carbon it outputs, then the GPU will be more carbon efficient. My hypothesis is that the parallelized sorting on GPUs will be LESS carbon efficient than sorting on CPUs.
+  - Serial CPU vs Parallel GPU: Generally GPUs have higher energy usage than CPUs. However, if the GPU sorts more than x times faster than the x times more carbon it outputs, then the GPU will be more carbon efficient. My hypothesis is that the parallelized sorting on GPUs will be LESS carbon efficient than sorting on CPUs as their speedups will not make up for the amount of carbon they output.
 - Method:
   - Create the serial sorting algorithms.
   - Create large diverse datasets. Some that are close to being sorted, some that are revered sorted, some that are completely random, some with only large numbers, some with small, and some with large standard deviations. Essential can take ints randomly from different distributions and ranges.
