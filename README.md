@@ -6,9 +6,9 @@ Algorithms to Implement (I = implemented)
   - Merge Sort (I)
   - Radix Sort (I)
   - Insertion Sort (I)
-  - Heap Sort 
-  - Shell Sort
-  - Bubblesort
+  - Heap Sort (I)
+  - Shell Sort (I)
+  - Bubblesort (I)
 - Parallel: Quick Sort, Merge Sort, Radix Sort, Insertion Sort, Bitonic Sort
 
 Big Os:
