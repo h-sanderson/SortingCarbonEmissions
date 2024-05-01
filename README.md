@@ -9,6 +9,7 @@ Algorithms to Implement (I = implemented)
   - Heap Sort (I)
   - Shell Sort (I)
   - Bubblesort (I)
+  - Timsort (python sorted() function)
 - Parallel: Quick Sort, Merge Sort, Radix Sort, Insertion Sort, Bitonic Sort
 
 Big Os:
@@ -30,7 +31,10 @@ ISSUES:
 - How to best run and measure CUDA CODE?
   - Run Script using subprocesses
   - Numba
-  - 
+  - CUDA Python: https://github.com/NVIDIA/cuda-python
+  - PyCUDA: https://pypi.org/project/pycuda/
+  - CuPy: https://cupy.dev/
+- Should I just test parallel sorting using CPU (Multiprocessing)?
 
 Research Process:
 - Hypothesis:
