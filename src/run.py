@@ -9,7 +9,7 @@ import time
 SORTS = {
     # "QuickSort": quickSortIterative,
     "RadixSort": radixSort,
-    "MergeSort": mergeSort, 
+    "MergeSort": mergeSort,
     # "InsertionSort": insertionSort, 
 }
 
@@ -26,7 +26,7 @@ class RunSort:
         measure_energy = []
         measure_time = []
 
-        for i in range(5):
+        for i in range(1):
             tracker.start()
             t0 = time.time()
             self.sort_func(np.array(array))
@@ -34,6 +34,7 @@ class RunSort:
             amt = tracker.stop()
             measure_energy.append(amt)
             measure_time.append(lapsedTime)
+            print(lapsedTime)
         
         self.track_energy[data_name] = measure_energy
         self.track_time[f"{data_name}_Time"] = measure_time
@@ -63,17 +64,18 @@ def main():
     for key, func in SORTS.items():
         runSorts.append(RunSort(func, key))
     
-    randArr = generate_ints(100000, 10, 20)
-    dataName = "UniformRandom100k"
-    run_all_sorts(randArr, dataName, runSorts)
-    df = conglomorate_data(runSorts)
-    df.to_csv("TEST.csv")
+    # randArr = generate_ints(100000, 10, 20)
+    # dataName = "UniformRandom100k"
+    # run_all_sorts(randArr, dataName, runSorts)
 
-    # randArr = generate_ints(1000000, 10, 20)
-    # dataName = "UniformRandom1M"
+    randArr = generate_ints(1000000, 1, 10000)
+    dataName = "UniformRandom1M"
+    run_all_sorts(randArr, dataName, runSorts)
 
     # randArr = generate_ints(10000000, 10, 20)
     # dataName = "UniformRandom10M"
+    df = conglomorate_data(runSorts)
+    df.to_csv("TEST.csv")
 
 
 if __name__ == "__main__":
