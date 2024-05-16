@@ -1,21 +1,13 @@
 import numpy as np
-import random
+from os import listdir
+from os.path import isfile, join
+import pandas as pd
 
-def check_sort(check_arr, sorted_arr):
-    check_arr = np.sort(randArr)
-    # sorted_arr = np.array(sorted_arr)
-    return np.array_equal(check_arr, sorted_arr)
+def check_sort(arr1, arr2):
+    return np.array_equal(arr1, arr2)
 
-# def generate_ints(distr, keysize, n, repeated_elements, low, high):
-def generate_ints(n, low, high):
-    arr = np.random.randint(low, high+1, n)
+onlyfiles = [f'data/{f}' for f in listdir('data') if isfile(join('data', f))]
+print(onlyfiles)
 
-    return arr
-
-def main():
-    randArr = generate_ints(5, 10, 20)
-    sortedArr = np.sort(randArr)
-    reversedArr = np.flip(sortedArr)
-
-if __name__ == "__main__":
-    main()
+df = pd.read_csv('data/Uniform0_0_10000_10k.csv')
+print(df['Random'].values)
