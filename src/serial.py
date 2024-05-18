@@ -21,10 +21,6 @@ def partition_r(arr, l, h):
     return partition(arr, l, h)
 
  
-# Function to do Quick sort
-# arr[] --> Array to be sorted,
-# l --> Starting index,
-# h --> Ending index
 def quickSort(arr, l = None, h = None):
     if not l and not h:
         l = 0
@@ -156,43 +152,6 @@ def radixSort(arr):
     
     return arr
 
-def radix_sort_strings(strings):
-    if len(strings) == 0:
-        return strings
-
-    # Find the maximum length of the strings
-    max_length = max(len(s) for s in strings)
-
-    # Pad strings with spaces so that all strings have the same length
-    padded_strings = [s.ljust(max_length) for s in strings]
-
-    # Perform counting sort for each character position
-    for position in range(max_length - 1, -1, -1):
-        padded_strings = counting_sort_by_character(padded_strings, position)
-
-    # Strip the padding spaces and return the sorted list
-    return [s.strip() for s in padded_strings]
-
-def counting_sort_by_character(strings, position):
-    # Initialize count array
-    count = [0] * 256  # 256 for ASCII characters
-
-    # Calculate count of each character at the given position
-    for s in strings:
-        count[ord(s[position])] += 1
-
-    # Calculate cumulative count
-    for i in range(1, 256):
-        count[i] += count[i - 1]
-
-    # Place strings into output array based on cumulative count
-    output = [None] * len(strings)
-    for s in reversed(strings):
-        char_index = ord(s[position])
-        output[count[char_index] - 1] = s
-        count[char_index] -= 1
-
-    return output
 
 def heapify(arr, n, i):
     large = i
@@ -238,21 +197,7 @@ def shellSort(arr):
     
     return arr
 
-# NOTE THIS IS OPTIMIZED WITH BREAKING IF no swaps are made
-def bubbleSort(elements):
-    # Looping from size of array from last index[-1] to index [0]
-    for n in range(len(elements)-1, 0, -1):
-        swapped = False
-        for i in range(n):
-            if elements[i] > elements[i + 1]:
-                swapped = True
-                # swapping data if the element is less than next element in the array
-                elements[i], elements[i + 1] = elements[i + 1], elements[i]
-        if not swapped:
-            # exiting the function if we didn't make a single swap
-            # meaning that the array is already sorted.
-            return elements
-    return elements
+
 
 from utils import check_sort
 import numpy as np

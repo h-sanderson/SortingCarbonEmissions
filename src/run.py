@@ -18,9 +18,6 @@ class RunSort:
     def __init__(self, sort_func: callable, project_name: str, is_gpu = 0):
         self.sort_func = sort_func
         self.project_name = project_name
-        # self.track_energy = {}
-        # self.track_time = {}
-        # self.track_emissions = {}
         self.tracked = []
         self.is_gpu = is_gpu
 
@@ -84,10 +81,7 @@ def run_sorts(sorts, data_dir = 'data', is_gpu = 0):
         runSorts.append(RunSort(func, key, is_gpu))
 
     onlyfiles = [f for f in listdir(data_dir) if isfile(join(data_dir, f))]
-    # data = np.random.randint(low=1, high=1000000, size=10000000).tolist()
-    # sorteddata = sorted(data)
-    # run_all_sorts(data, f'BLEH', runSorts, sorteddata)
-    # return
+
     for file_name in onlyfiles:
         # read data and run
         data_name = file_name.replace('.csv', "")
