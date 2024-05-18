@@ -1,20 +1,36 @@
-# Quick Sorts (used GeeksforGeeks for reference)
-def quicksort_list_comp(arr):
-    # List comprehension way, this is probably faster, but could reach recursion limit
-    if len(arr) <= 1:
-        return arr
-    
-    pi = arr[0]
-    left_arr = [x for x in arr[1:] if x < pi]
-    right_arr = [x for x in arr[1:] if x >= pi]
+import pandas as pd
+import random
 
-    return quicksort_list_comp(left_arr) + [pi] + quicksort_list_comp(right_arr)
+def partition(arr,l,h):
+    i = ( l - 1 )
+    x = arr[h]
+ 
+    for j in range(l , h):
+        if arr[j] <= x:
+ 
+            # increment index of smaller element
+            i = i+1
+            arr[i],arr[j] = arr[j],arr[i]
+ 
+    arr[i+1],arr[h] = arr[h],arr[i+1]
+    return i+1
 
-def quickSortIterative(arr,l = None, r = None):
-    if not r and not l:
+def partition_r(arr, l, h):
+    n = random.randint(l,h)
+    arr[h],arr[n] = arr[n],arr[h]
+    return partition(arr, l, h)
+
+ 
+# Function to do Quick sort
+# arr[] --> Array to be sorted,
+# l --> Starting index,
+# h --> Ending index
+def quickSort(arr, l = None, h = None):
+    if not l and not h:
         l = 0
-        r = len(arr) - 1
-    size = r - l + 1
+        h = len(arr) - 1
+    # Create an auxiliary stack
+    size = h - l + 1
     stack = [0] * (size)
  
     # initialize top of stack
@@ -24,20 +40,20 @@ def quickSortIterative(arr,l = None, r = None):
     top = top + 1
     stack[top] = l
     top = top + 1
-    stack[top] = r
+    stack[top] = h
  
     # Keep popping from stack while is not empty
     while top >= 0:
  
         # Pop h and l
-        r = stack[top]
+        h = stack[top]
         top = top - 1
         l = stack[top]
         top = top - 1
  
         # Set pivot element at its correct position in
         # sorted array
-        p = partition(arr, l, r)
+        p = partition_r( arr, l, h )
  
         # If there are elements on left side of pivot,
         # then push left side to stack
@@ -49,34 +65,19 @@ def quickSortIterative(arr,l = None, r = None):
  
         # If there are elements on right side of pivot,
         # then push right side to stack
-        if p+1 < r:
+        if p+1 < h:
             top = top + 1
             stack[top] = p + 1
             top = top + 1
-            stack[top] = r
-    
+            stack[top] = h
     return arr
-
-
-def partition(arr, l, r):
-    pi = arr[r]
-    i = l-1
-
-    for j in range(l, r):
-        if arr[j] <= pi:
-            i += 1
-            (arr[i], arr[j]) = (arr[j], arr[i])
-    
-    arr[r], arr[i + 1] = arr[i + 1], arr[r]
-
-    return i + 1
     
 # Merge Sort (used GeeksforGeeks for reference)
 # This is the top down approach of merge sort
 
 def merge(arr1, arr2):
     i, j = 0, 0
-    result=[]
+    result = []
 
     while (i < len(arr1) and j < len(arr2)):
         if arr2[j] > arr1[i]:
@@ -97,7 +98,7 @@ def merge(arr1, arr2):
     return result
     
 def mergeSort(arr):
-    if len(arr) <= 1:
+    if len(arr) < 2:
         return arr
     
     mid = len(arr)//2
@@ -155,6 +156,43 @@ def radixSort(arr):
     
     return arr
 
+def radix_sort_strings(strings):
+    if len(strings) == 0:
+        return strings
+
+    # Find the maximum length of the strings
+    max_length = max(len(s) for s in strings)
+
+    # Pad strings with spaces so that all strings have the same length
+    padded_strings = [s.ljust(max_length) for s in strings]
+
+    # Perform counting sort for each character position
+    for position in range(max_length - 1, -1, -1):
+        padded_strings = counting_sort_by_character(padded_strings, position)
+
+    # Strip the padding spaces and return the sorted list
+    return [s.strip() for s in padded_strings]
+
+def counting_sort_by_character(strings, position):
+    # Initialize count array
+    count = [0] * 256  # 256 for ASCII characters
+
+    # Calculate count of each character at the given position
+    for s in strings:
+        count[ord(s[position])] += 1
+
+    # Calculate cumulative count
+    for i in range(1, 256):
+        count[i] += count[i - 1]
+
+    # Place strings into output array based on cumulative count
+    output = [None] * len(strings)
+    for s in reversed(strings):
+        char_index = ord(s[position])
+        output[count[char_index] - 1] = s
+        count[char_index] -= 1
+
+    return output
 
 def heapify(arr, n, i):
     large = i
@@ -170,7 +208,7 @@ def heapify(arr, n, i):
     if i != large:
         arr[i], arr[large] = arr[large], arr[i]
         heapify(arr, n, large)
-
+    
 def heapSort(arr):
     n = len(arr)
 
@@ -201,14 +239,50 @@ def shellSort(arr):
     return arr
 
 # NOTE THIS IS OPTIMIZED WITH BREAKING IF no swaps are made
-def bubbleSort(arr):
-    n = len(arr)
-    
-    for i in range(n):
+def bubbleSort(elements):
+    # Looping from size of array from last index[-1] to index [0]
+    for n in range(len(elements)-1, 0, -1):
         swapped = False
-        for j in range(0, n-i-1):
-            if arr[j] > arr[j+1]:
-                arr[j], arr[j+1] = arr[j+1], arr[j]
+        for i in range(n):
+            if elements[i] > elements[i + 1]:
                 swapped = True
-        if (swapped == False):
-            break
+                # swapping data if the element is less than next element in the array
+                elements[i], elements[i + 1] = elements[i + 1], elements[i]
+        if not swapped:
+            # exiting the function if we didn't make a single swap
+            # meaning that the array is already sorted.
+            return elements
+    return elements
+
+from utils import check_sort
+import numpy as np
+import time
+
+def main():
+    # df = pd.read_csv(f'data/worstmerge/worstmerge_300k.csv')
+    df = pd.read_csv(f'data/radix/BigK_100000_100k.csv')
+    # print("start")
+    t0 = time.time()
+    # vals = [1 if i%2==0 else 2 for i in range(0,1000*1000)]
+    vals = df['Random'].values.tolist()
+    print(len(str(max(vals))))
+    print(len(vals))
+    sortattempt1 = bubbleSort(vals)
+    t1 = time.time()
+    # print(f"Time: {t1-t0}")
+    # t0 = time.time()
+    # sortattempt2 = heapSort(df['Random'].values.tolist())
+    sortattempt2 = np.sort(vals)
+    # t1 = time.time()
+    print(check_sort(sortattempt2, sortattempt1))
+    print(f"Time: {t1-t0}")
+
+if __name__ == "__main__":
+    main()
+
+# main()
+# import sys
+# sys.setrecursionlimit(1000)
+# print(sys.getrecursionlimit())
+# main()
+
